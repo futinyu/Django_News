@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Python 新闻</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/news.css">
+    <link rel="stylesheet" href="/static/css/advert.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="header-main">
+            <div class="header-logo">
+                <a href="/" class="logo-pic"><img src="/static/img/logo.png" alt="logo"></a>
+                <span class="logo-text">Python</span>
+            </div>
+            <ul class="header-list">
+                <li><a href="{% url 'newapp:index' %}">首页</a></li>
+                <li><a href="{% url 'newapp:main_new' %}">新闻</a></li>
+                <li class="header-hover"><a href="{% url 'newapp:advert' %}">广告</a></li>
+            </ul>
+            <div class="header-user">
+                <div class="user-main">
+                    {% if name %}
+                    <div class="user-main">
+                    <span>您好 {{ name }}</span>·<a href="{% url 'newapp:logout'%}">注销</a>
+                </div>
+                {% else %}
+                     <div class="user-main">
+                    <a href="{% url 'newapp:login'%}" >登录</a>·<a href="{% url 'newapp:register'%}">注册</a>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 主体 -->
+    <div class="main">
+        <div class="main-context">
+            <div class="context-row">
+                <div class="context-pos">
+                    <ul class="pos-list">
+                        <li><a href="javascript:;"><img src="/static/img/home.png" alt="广告"><span>广告</span></a></li>
+                        <span class="split">/</span>
+                        <li><a href="javascript:;"><img src="/static/img/dir.png" alt="列表"><span>列表</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="context-row">
+                <div class="news-box row-bg-white">
+                    <div class="news-title advert-title">
+                        <img class="title-pic" src="/static/img/beautiful.png" alt="beautiful">
+                        <h3 class="title-text" >精彩推荐</h3>
+                    </div>
+                    <div class="pic-wrap">
+                       <div class="wrap-left">
+                            <div class="wrap-l-t animate-show">
+                                <img src="../../static/img/bili.jpg" alt="">
+                                <div class="pic-info"></div>
+                                <a class="pic-enter" href="https://www.bilibili.com/" target="_blank">点击进入</a>
+                            </div>
+                            <div class="wrap-l-b">
+                                <div class="wrap-l-b-l animate-show">
+                                    <img src="../../static/img/douyu.png" alt="">
+                                    <div class="pic-info"></div>
+                                    <a class="pic-enter" href="https://www.douyu.com/" target="_blank">点击进入</a>
+                                </div>
+                                <div class="wrap-l-b-r animate-show">
+                                    <img src="../../static/img/huya.png" alt="">
+                                    <div class="pic-info"></div>
+                                    <a class="pic-enter" href="https://www.huya.com" target="_blank">点击进入</a>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="wrap-right animate-show">
+                            <img src="../../static/img/qie.jpg" alt="">
+                            <div class="pic-info"></div>
+                            <a class="pic-enter" href="https://live.qq.com/" target="_blank">点击进入</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="context-row">
+                <div class="news-box">
+                    <div class="news-title advert-title advert-title-bg">
+                        <img class="title-pic" src="/static/img/our.png" alt="our">
+                        <h3 class="title-text" >关于我们</h3>
+                    </div>
+                    <ul class="news-flex-list advert-flex-list">
+                        <li>
+                            <div class="flex-pic"><img class="animate animate-scale" src="/static/img/jsc.jpg" alt=""></div>
+                            <h4 class="flex-title">一只有梦想的咸鱼</h4>
+                            <p class="flex-desc">负责页面设计、部分前端模板的编写以及评论功能的实现（配合后端）。我想成为一只咸鱼，不想翻身的那种(～￣▽￣)～</p>
+                        </li>
+                        <li>
+                            <div class="flex-pic"><img class="animate animate-scale" src="/static/img/czz.jpg" alt=""></div>
+                            <h4 class="flex-title">一个帅比</h4>
+                            <p class="flex-desc">一个帅比的忧伤。负责爬虫,新闻主页面，新闻一级页面的布局</p>
+                        </li>
+                        <li>
+                            <div class="flex-pic"><img class="animate animate-scale" src="/static/img/fty.jpg" alt=""></div>
+                            <h4 class="flex-title">帅边呐~</h4>
+                            <p class="flex-desc">负责数据库设计，后端数据的获取,渲染（配合前端）。做一个有梦想的人并不可怕，可怕的是朝着梦里奔跑</p>
+                        </li>
+                        <li>
+                            <div class="flex-pic"><img class="animate animate-scale" src="/static/img/zyp.jpg" alt=""></div>
+                            <h4 class="flex-title">这是一个狠人</h4>
+                            <p class="flex-desc">负责注册，登录页面，JS验证，以及首页部分的轮播特效。 这是一个狠人，想上王者的狠人。</p>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <!-- 尾部 -->
+    <footer class="footer">
+    <div class="footer-up">
+        <div class="up-main">
+            <div class="footer-link">
+                <h4>常用链接</h4>
+                <ul class="link-list">
+                    <li><a href="https://www.baidu.com/" target="_blank">百度</a></li>
+                    <li><a href="https://www.bailiban.com/" target="_blank">百里半</a></li>
+                    <li><a href="https://www.google.com/" target="_blank">谷歌</a></li>
+                    <li><a href="https://juejin.im/" target="_blank">掘金社区</a></li>
+                    <li><a href="https://www.zhihu.com/signin?next=%2F" target="_blank">知乎</a></li>
+                    <li><a href="https://github.com/" target="_blank">Github</a></li>
+                    <li><a href="https://www.qq.com/" target="_blank">腾讯</a></li>
+                    <li><a href="https://cn.aliyun.com/" target="_blank">阿里云</a></li>
+                    <li><a href="https://www.163.com/" target="_blank">网易</a></li>
+                    <li><a href="http://www.sohu.com/" target="_blank">搜狐</a></li>
+                    <li><a href="https://www.epicgames.com/store/zh-CN/" target="_blank">Epic</a></li>
+                    <li><a href="https://store.steampowered.com/" target="_blank">steam</a></li>
+                </ul>
+            </div>
+            <div class="footer-pic">
+                <div class="pic-wexin">
+                    <div class="pic-main"><img src="../../static/img/weixin.png" alt="wexin"></div>
+                    <span>微信</span>
+                </div>
+                <div class="pic-QQ">
+                    <div class="pic-main"><img src="../../static/img/qq.jpg" alt="QQ"></div>
+                    <span>QQ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="footer-down">
+            <span>Copyright © 2019 Sohu All Rights Reserved. 厚溥公司 版权所有</span>
+            <span>邮箱：jubaosohu@sohu-inc.com</span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Python 新闻</title>
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/news.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="header-main">
+            <div class="header-logo">
+                <a href="/" class="logo-pic"><img src="../../static/img/logo.png" alt="logo"></a>
+                <span class="logo-text">Python</span>
+            </div>
+            <ul class="header-list">
+                <li><a href="{% url 'newapp:index'%}">首页</a></li>
+                <li class="header-hover"><a href="{% url 'newapp:main_new'%}">新闻</a></li>
+                <li><a href="{% url 'newapp:advert'%}">广告</a></li>
+            </ul>
+            <div class="header-user">
+                <div class="user-main">
+                   {% if name %}
+                    <div class="user-main">
+                    <span>您好 {{ name }}</span>·<a href="{% url 'newapp:logout'%}">注销</a>
+                </div>
+                {% else %}
+                     <div class="user-main">
+                    <a href="{% url 'newapp:login'%}" >登录</a>·<a href="{% url 'newapp:register'%}">注册</a>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 主体 -->
+    <div class="main">
+        <nav class="main-nav">
+            <ul class="nav-list">
+            {% for i in msg %}
+                  <li><a href="{% url 'newapp:child_new'%}?type={{i }}">{{ i }}</a></li>
+                {% endfor %}
+
+{#                <li class="nav-hover"><a href="{% url 'newapp:main_new'%}">推荐</a></li>#}
+{#                <li><a href="{% url 'newapp:child_new'%}?s=1">时政</a></li>#}
+{#                <li><a href="{% url 'newapp:child_new'%}?s=2">军事</a></li>#}
+{#                <li><a href="{% url 'newapp:child_new'%}?s=3">警法</a></li>#}
+{#                <li><a href="{% url 'newapp:child_new'%}?s=4">公益</a></li>#}
+{#                <li><a href="{% url 'newapp:child_new'%}?s=5">媒体</a></li>#}
+{#                <li><a href="{% url 'newapp:child_new'%}?s=6">无人机</a></li>#}
+            </ul>
+        </nav>
+        <div class="main-context">
+            <div class="context-row">
+                <div class="row-flex-2 row-left row-bg-white">
+                    <div class="context-pos">
+                        <ul class="pos-list">
+                            <li><a href="{% url 'newapp:main_new' %}"><img src="../../static/img/home.png" alt="主页"><span>新闻</span></a></li>
+                            <span class="split">/</span>
+                            <li><a href="{% url 'newapp:child_new' %}?type=推荐"><img src="../../static/img/dir.png" alt="分类"><span>推荐</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- 新闻文字列表 -->
+                    <div class="news-box">
+                        <div class="news-title">
+                            <img class="title-pic" src="../../static/img/hot.png" alt="hot">
+                            <h3 class="title-text" >热点新闻</h3>
+                            <span class="news-more"><a href="{% url 'newapp:child_new' %}?type=推荐">更多</a></span>
+                        </div>
+                        <ul class="news-text-list">
+                            {% for n in yaowen_list %}
+                            <li class="animate animate-pull"><a href="{% url 'newapp:detail_new' %}?newid={{ n.newID }} ">{{ n.newTitle }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="row-flex-3 row-right poster-box">
+                    <!-- todo 图片轮播 -->
+                    <div class="poster-main recommend-carousel">
+                        <div class="poster-btn poster-prev-btn"></div>
+                            <ul class="poster-list">
+                                <li class="poster-item"><a href="#"><img src="../../static/img/fty1.jpg" alt="我是美少女"></a></li>
+                                <li class="poster-item"><a href="#"><img src="../../static/img/fty2.jpg" alt="我是美少女"></a></li>
+                                <li class="poster-item"><a href="#"><img src="../../static/img/fty3.jpg" alt="我是美少女"></a></li>
+                                <li class="poster-item"><a href="#"><img src="../../static/img/fty4.jpg" alt="我是美少女"></a></li>
+{#                                <li class="poster-item"><a href="#"><img src="../../static/img/banner.jpg" alt="我是第五幅图片标题"></a></li>#}
+                            </ul>
+                        <div class="poster-btn poster-next-btn"></div>
+                    </div>
+                    <script src="../../static/js/Carousel.js"></script>
+                    <script>
+                        /*
+                            带 * 为必须配置/默认参数
+                            type:轮播方式  * Horizontal 水平的 | Vertical 垂直的
+                            timing:过度效果 css3效果 * linear
+                            duration：过度效果时间 < 1s * 1s
+                            * oUl：图片列表
+                            transferTime:图片切换时间  > 1s * 3000
+                        */
+                        var banner = new Carousel({
+                                type:'Horizontal',
+                                timing:'ease-in',
+                                duration:'1s',
+                                oUl:document.querySelector('.poster-list'),
+                                transferTime:3000
+                            })
+                    </script>
+                </div>
+            </div>
+            <div class="context-row">
+                <div class="row-left row-flex-1 row-bg-white">
+                    <!-- 新闻图文列表 -->
+                    <div class="news-box">
+                        <div class="news-title">
+                            <img class="title-pic" src="../../static/img/star.png" alt="star">
+                            <h3 class="title-text">精彩推荐</h3>
+                            <span class="news-more"><a href="{% url 'newapp:child_new' %}?type=推荐">更多</a></span>
+                        </div>
+                        <ul class="news-pic-list">
+                           {% for new_recomment in new_recommends %}
+                            <li>
+                                <div class="news-time">
+                                    <img class="time-pic"  src="/static/img/time.png" alt="time">
+                                    <span class="time-text">{{ new_recomment.newDate }}</span>
+                                </div>
+                                <a href="{% url 'newapp:detail_new' %}?newid={{ new_recomment.newID }}" class="item-main">
+                                    <div class="news-banner"><img class="animate animate-scale" src="{{ new_recomment.newImage}}" alt="banner"></div>
+                                    <div class="news-info">
+                                        <h3 class="info-title">{{ new_recomment.newTitle|truncatechars:"22" }}</h3>
+                                        <p class="info-desc">{{ new_recomment.newContent|truncatechars:"50" }}</p>
+                                    </div>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="row-right row-flex-1">
+                    <a href="{% url 'newapp:main_new' %}" class="news-change">换一批</a>
+                    <ul class="news-flex-list">
+                        {% for rand_new in rand_news %}
+                        <li><a href="{% url 'newapp:detail_new' %}?newid={{ rand_new.newID }}">
+                            <div class="flex-pic"><img class="animate animate-scale" src="{{ rand_new.newImage }}" alt=""></div>
+                            <h4 class="flex-title">{{ rand_new.newTitle|truncatechars:"20" }}</h4>
+                            <p class="flex-desc">{{ rand_new.newDes|truncatechars:"40"}}</p>
+                            </a>
+                        </li>
+                        {% endfor %}
+{#                        <li>#}
+{#                            <div class="flex-pic"><img class="animate animate-scale" src="../../static/img/banner.jpg" alt=""></div>#}
+{#                            <h4 class="flex-title">清华，一生有你——2019年毕业季专场</h4>#}
+{#                            <p class="flex-desc">又是一年毕业季。大学是一段梦的旅程，我们是一个个寻梦的人，此刻的我们站在大学的尾巴上，回首过往。就像...</p>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="flex-pic"><img class="animate animate-scale" src="../../static/img/banner.jpg" alt=""></div>#}
+{#                            <h4 class="flex-title">清华，一生有你——2019年毕业季专场</h4>#}
+{#                            <p class="flex-desc">又是一年毕业季。大学是一段梦的旅程，我们是一个个寻梦的人，此刻的我们站在大学的尾巴上，回首过往。就像...</p>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="flex-pic"><img class="animate animate-scale" src="../../static/img/banner.jpg" alt=""></div>#}
+{#                            <h4 class="flex-title">清华，一生有你——2019年毕业季专场</h4>#}
+{#                            <p class="flex-desc">又是一年毕业季。大学是一段梦的旅程，我们是一个个寻梦的人，此刻的我们站在大学的尾巴上，回首过往。就像...</p>#}
+{#                        </li>#}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 尾部 -->
+    <footer class="footer">
+        <div class="footer-up">
+            <div class="up-main">
+                <div class="footer-link">
+                    <h4>常用链接</h4>
+                    <ul class="link-list">
+                        <li><a href="">百度</a></li>
+                        <li><a href="">百里半</a></li>
+                        <li><a href="">谷歌</a></li>
+                        <li><a href="">掘金社区</a></li>
+                        <li><a href="">知乎</a></li>
+                        <li><a href="">Github</a></li>
+                        <li><a href="">百度</a></li>
+                        <li><a href="">百里半</a></li>
+                        <li><a href="">谷歌</a></li>
+                        <li><a href="">掘金社区</a></li>
+                        <li><a href="">知乎</a></li>
+                        <li><a href="">Github</a></li>
+                    </ul>
+                </div>
+                <div class="footer-pic">
+                    <div class="pic-wexin">
+                        <div class="pic-main"><img src="../../static/img/weixin.png" alt="wexin"></div>
+                        <span>微信</span>
+                    </div>
+                    <div class="pic-QQ">
+                        <div class="pic-main"><img src="../../static/img/qq.jpg" alt="QQ"></div>
+                        <span>QQ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-down">
+            <span>Copyright © 2019 Sohu All Rights Reserved. 厚溥公司 版权所有</span>
+            <span>邮箱：jubaosohu@sohu-inc.com</span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .test a:hover{color:red}
+    </style>
+</head>
+<body>
+<ul>
+    {% for i in msg %}
+      <li>{{ i }}</li>
+    {% endfor %}
+</ul>
+    <center><div class="test">
+        {% for j in pagelist %}
+        {{ j|safe }}
+        {% endfor %}
+    </div></center>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Python 新闻</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/news.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="header-main">
+            <div class="header-logo">
+                <a href="/" class="logo-pic"><img src="/static/img/logo.png" alt="logo"></a>
+                <span class="logo-text">Python</span>
+            </div>
+            <ul class="header-list">
+                <li><a href="{% url 'newapp:index' %}">首页</a></li>
+                <li class="header-hover"><a href="{% url 'newapp:main_new' %}">新闻</a></li>
+                <li><a href="{% url 'newapp:advert' %}">广告</a></li>
+            </ul>
+            <div class="header-user">
+                <div class="user-main">
+                    {% if name %}
+                    <div class="user-main">
+                    <span>你好 {{ name }}</span>·<a href="{% url 'newapp:logout'%}">注销</a>
+                </div>
+                {% else %}
+                     <div class="user-main">
+                    <a href="{% url 'newapp:login'%}" >登录</a>·<a href="{% url 'newapp:register'%}">注册</a>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 主体 -->
+    <div class="main">
+        <nav class="main-nav">
+            <ul class="nav-list">
+                {% for i in msg %}
+                    {% ifequal type i %}
+                        <li class="nav-hover">
+                            <a href="{% url 'newapp:child_new'%}?type={{ i }}&p=1">{{i}}</a>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'newapp:child_new'%}?type={{ i }}&p=1">{{ i }}</a></li>
+                    {% endifequal %}
+                {% endfor %}
+
+{#                <li><a href="">推荐</a></li>#}
+{#                <li class="nav-hover"><a href="">时政</a></li>#}
+{#                <li><a href="">军事</a></li>#}
+{#                <li><a href="">警法</a></li>#}
+{#                <li><a href="">公益</a></li>#}
+{#                <li><a href="">媒体</a></li>#}
+{#                <li><a href="">无人机</a></li>#}
+            </ul>
+        </nav>
+        <div class="main-context">
+            <div class="context-row context-listPage">
+                <div class="context-pos">
+                    <ul class="pos-list">
+                        <li><a href="{% url 'newapp:main_new' %}"><img src="/static/img/home.png" alt="主页"><span>新闻</span></a></li>
+                        <span class="split">/</span>
+                        <li><a href="{% url 'newapp:child_new' %}?type=时政"><img src="/static/img/dir.png" alt="分类"><span>时政</span></a></li>
+                        <span class="split">/</span>
+                        <li><a href=""><img src="/static/img/file.png" alt="列表"><span>列表</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="context-row">
+                <div class="row-flex-3 row-bg-white news-list-wrap">
+                    <ul class="news-pic-list-2">
+                    {#从数据库查询标题，标签，时间，图片链接，阅读量#}
+                         {%  for new_obj in new_list.0 %}
+                        <li>
+                            <div class="pic-img"><img src="{{ new_obj.newImage }}" alt=""></div>
+                            <div class="news-info">
+                                <h3 class="info-title-blod">
+                                    <a href="{% url 'newapp:detail_new'%}?newid={{ new_obj.newID }}">{{ new_obj.newTitle }}</a></h3>
+                                <div class="info-sign">
+                                    <ul class="sign-list">
+                                       {% if forloop.first %}
+                                           {% for i in new_list.1 %}
+                                           <li>{{ i}}</li>
+                                           {% endfor %}
+                                       {% elif forloop.last %}
+                                            {% for i in new_list.3 %}
+                                           <li>{{i}}</li>
+                                           {% endfor %}
+                                       {% else %}
+                                           {% for i in new_list.2 %}
+                                           <li>{{i}}</li>
+                                           {% endfor %}
+                                       {% endif %}
+                                    </ul>
+                                    <span class="news-puttime">{{ new_obj.newDate }}</span>
+                                    <span class="news-views"><img class="views-img" src="/static/img/read.png" alt="阅读量">{{ new_obj.newView }}</span>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+{#                        <li>#}
+{#                            <div class="pic-img"><img src="/static/img/banner.jpg" alt=""></div>#}
+{#                            <div class="news-info">#}
+{#                                <h3 class="info-title-blod">媒体:首富儿媳上A级通缉令 是对"悍马迎亲"的嘲讽</h3>#}
+{#                                <div class="info-sign">#}
+{#                                    <ul class="sign-list">#}
+{#                                        <li>Vue</li>#}
+{#                                        <li>NodeJS</li>#}
+{#                                        <li>微信小程序</li>#}
+{#                                    </ul>#}
+{#                                    <span class="news-puttime">一小时前</span>#}
+{#                                    <span class="news-views"><img class="views-img" src="/static/img/read.png" alt="阅读量">999</span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <div class="pic-img"><img src="/static/img/banner.jpg" alt=""></div>#}
+{#                            <div class="news-info">#}
+{#                                <h3 class="info-title-blod">媒体:首富儿媳上A级通缉令 是对"悍马迎亲"的嘲讽</h3>#}
+{#                                <div class="info-sign">#}
+{#                                    <ul class="sign-list">#}
+{#                                        <li>Vue</li>#}
+{#                                        <li>NodeJS</li>#}
+{#                                        <li>微信小程序</li>#}
+{#                                    </ul>#}
+{#                                    <span class="news-puttime">一小时前</span>#}
+{#                                    <span class="news-views"><img class="views-img" src="/static/img/read.png" alt="阅读量">999</span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        #}
+{#                        </li>#}
+                        <div class="news-pageNav" id="pageNav">
+                            <span class="page-prev"><img src="/static/img/arrow-left.png" alt=""></span>
+                            <ul class="page-list">
+                                {% for i in p_page.1 %}
+                                    {% ifequal p_page.0 i %}
+                                    <li class="active"><a href="{% url 'newapp:child_new'%}?type={{ type }}&p={{ i }}">{{ i }}</a></li>
+                                    {% else %}
+                                        <li><a href="{% url 'newapp:child_new'%}?type={{ type }}&p={{ i }}">{{ i }}</a></li>
+                                    {% endifequal %}
+                                {% endfor %}
+{#                                <li class="active"><a href="">1</a></li>#}
+{#                                <li><a href="">2</a></li>#}
+{#                                <li><a href="">3</a></li>#}
+{#                                <li><a href="">4</a></li>#}
+{#                                <li><a href="">5</a></li>#}
+{#                                <li><a href="">6</a></li>#}
+{#                                <li><a href="">7</a></li>#}
+{#                                <li><a href="">8</a></li>#}
+{#                                <li><a href="">9</a></li>#}
+{#                                <li><a href="">10</a></li>#}
+{#                                <li><a href="">11</a></li>#}
+{#                                <li><a href="">12</a></li>#}
+{#                                <li><a href="">13</a></li>#}
+{#                                <li><a href="">14</a></li>#}
+{#                                <li><a href="">15</a></li>#}
+                            </ul>  
+                            <span class="page-next"><img src="/static/img/arrow-right.png" alt=""></span>
+                        </div>
+                        <script src="/static/js/pageNav.js"></script>
+                    </ul>
+                </div>
+                <div class="row-flex-2 row-bg-white news-list-wrap">
+                    <div class="news-box">
+                        <div class="news-title">
+                            <img class="title-pic" src="/static/img/hot.png" alt="hot">
+                            <h3 class="title-text" >热点新闻</h3>
+                            <span class="news-more">更多</span>
+                        </div>
+                        <ul class="news-text-list">
+                            {% for h_new in hot_news %}
+                            <li class="animate animate-pull">
+                                <a href="{% url 'newapp:detail_new' %}?newid={{ h_new.newID }}">{{ h_new.newTitle|truncatechars:'22' }}</a>
+                            </li>
+{#                            <li class="animate animate-pull"><a href="#">军事专家解读《新时代的中国国防》六大亮点</a></li>#}
+{#                            <li class="animate animate-pull"><a href="#">全国妇联追授周泉泉全国三八红旗手荣誉</a></li>#}
+{#                            <li class="animate animate-pull"><a href="#">国家防总派出5个工作组协助地方开展抗洪救灾</a></li>#}
+{#                            <li class="animate animate-pull"><a href="#">国家防总派出5个工作组协助地方开展抗洪救灾</a></li>    #}
+                         {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 尾部 -->
+    <footer class="footer">
+    <div class="footer-up">
+        <div class="up-main">
+            <div class="footer-link">
+                <h4>常用链接</h4>
+                <ul class="link-list">
+                    <li><a href="https://www.baidu.com/" target="_blank">百度</a></li>
+                    <li><a href="https://www.bailiban.com/" target="_blank">百里半</a></li>
+                    <li><a href="https://www.google.com/" target="_blank">谷歌</a></li>
+                    <li><a href="https://juejin.im/" target="_blank">掘金社区</a></li>
+                    <li><a href="https://www.zhihu.com/signin?next=%2F" target="_blank">知乎</a></li>
+                    <li><a href="https://github.com/" target="_blank">Github</a></li>
+                    <li><a href="https://www.qq.com/" target="_blank">腾讯</a></li>
+                    <li><a href="https://cn.aliyun.com/" target="_blank">阿里云</a></li>
+                    <li><a href="https://www.163.com/" target="_blank">网易</a></li>
+                    <li><a href="http://www.sohu.com/" target="_blank">搜狐</a></li>
+                    <li><a href="https://www.epicgames.com/store/zh-CN/" target="_blank">Epic</a></li>
+                    <li><a href="https://store.steampowered.com/" target="_blank">steam</a></li>
+                </ul>
+            </div>
+            <div class="footer-pic">
+                <div class="pic-wexin">
+                    <div class="pic-main"><img src="../../static/img/weixin.png" alt="wexin"></div>
+                    <span>微信</span>
+                </div>
+                <div class="pic-QQ">
+                    <div class="pic-main"><img src="../../static/img/qq.jpg" alt="QQ"></div>
+                    <span>QQ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="footer-down">
+            <span>Copyright © 2019 Sohu All Rights Reserved. 厚溥公司 版权所有</span>
+            <span>邮箱：jubaosohu@sohu-inc.com</span>
+        </div>
+    </footer>
+</body>
+</html>

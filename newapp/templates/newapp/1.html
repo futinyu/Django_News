@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>欢迎来到登录页面</title>
+		<link rel="stylesheet" type="text/css" href="/static/css/login.css"/>
+		<script src="static/jq/jquery-1.10.2.min.js"></script>
+	</head>
+	<body>
+		<div id="zong">
+			<div id="yu"><img src="/static/images/avatar.png"></div>
+			<div id="zhu">
+				<h3><p>登录</p></h3>
+				<form action="{% url 'newapp:login'%}" method="post">
+                    {% csrf_token %}
+					<ul class="gao">
+						<li>
+							<input placeholder="请输入手机号或者邮箱"  type="text" id="user" name="user" onblur="fun4(this)"/><br>
+                            <span class="username">{{ message }}</span>
+						</li>
+						<li>
+							<input placeholder="请输入密码" type="password" id="pwd" name="pwd" onkeyup="fun3(this)"/><br>
+							<span class="password"></span>
+						</li>
+						<button onclick= "fun0(this)"/>登录</button>
+						<br><br>
+					</ul>
+					
+				</form>
+				<span><a href="{% url 'newapp:register' %}">没有账号？点我注册</a></span>
+			</div>
+		</div>
+	</body>
+	<script src="/static/js/register.js" type="text/javascript" charset="utf-8"></script>
+	
+</html>	

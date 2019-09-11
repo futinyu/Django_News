@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Python 新闻</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/news.css">
+    <link rel="stylesheet" href="/static/css/detail.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="header-main">
+            <div class="header-logo">
+                <a href="/" class="logo-pic"><img src="/static/img/logo.png" alt="logo"></a>
+                <span class="logo-text">Python</span>
+            </div>
+            <ul class="header-list">
+                <li><a href="{% url 'newapp:index'%}">首页</a></li>
+                <li class="header-hover"><a href="#">新闻</a></li>
+                <li><a href="{% url 'newapp:advert'%}">广告</a></li>
+            </ul>
+            <div class="header-user">
+                <div class="user-main">
+                   {% if name %}
+                    <div class="user-main">
+                    <span>您好 {{ name }}</span>·<a href="{% url 'newapp:logout'%}">注销</a>
+                </div>
+                {% else %}
+                     <div class="user-main">
+                    <a href="{% url 'newapp:login'%}" >登录</a>·<a href="{% url 'newapp:register'%}">注册</a>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 主体 -->
+    <div class="main">
+        <div class="main-context">
+            <div class="context-row context-listPage">
+                <div class="context-pos">
+                    <ul class="pos-list">
+                        <li><a href="{% url 'newapp:main_new'%}"><img src="/static/img/home.png" alt="主页"><span>新闻</span></a></li>
+                        <span class="split">/</span>
+                        <li><a href="{% url 'newapp:child_new'%}?type=%E5%9B%BD%E5%86%85&p=1"><img src="/static/img/dir.png" alt="分类"><span>国内</span></a></li>
+                        <span class="split">/</span>
+                        <li><a href="javascript:;"><img src="/static/img/file.png" alt="列表"><span>正文</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="context-row context-listPage">
+                <div class="row-flex-3 row-right-border row-bg-white">
+                    <div class="context-wrap">
+                        <div class="context-title">
+                            <h2 class="title-text">{{ one_new.newTitle }}</h2>
+                            <div class="title-info">
+                                <span class="info-time">{{ one_new.newDate }}</span>
+                                <span class="info-origin">{{ one_new.newOrigin }}</span>
+                                <span class="info-views"><img src="/static/img/read.png" alt="">{{ one_new.newView }}</span>
+                            </div>
+                        </div>
+                        <!-- 正文 -->
+                        <div>{{ one_new.newContent|safe}}</div>
+                    </div>
+                </div>
+                <div class="row-flex-1 row-bg-white">
+                    <div class="news-box">
+                        <div class="news-title">
+                            <img class="title-pic" src="/static/img/recommend.png" alt="hot">
+                            <h3 class="title-text" >推荐</h3>
+                            <span class="news-more">更多</span>
+                        </div>
+                        <ul class="news-text-list">
+                            {% for recommend_new in Recommend_News %}
+                            <li class="animate animate-pull">
+                                <a href="{% url 'newapp:detail_new' %}?newid={{ recommend_new.newID }}">{{ recommend_new.newTitle|safe|truncatechars:'15' }}</a>
+                            </li>
+                            {% endfor %}
+{#                            <li class="animate animate-pull"><a href="#">军事专家解读《新时代的中国国防》六大亮点</a></li>#}
+{#                            <li class="animate animate-pull"><a href="#">全国妇联追授周泉泉全国三八红旗手荣誉</a></li>#}
+{#                            <li class="animate animate-pull"><a href="#">国家防总派出5个工作组协助地方开展抗洪救灾</a></li>#}
+{#                            <li class="animate animate-pull"><a href="#">国家防总派出5个工作组协助地方开展抗洪救灾</a></li>    #}
+                        </ul>
+                    </div>
+                    <div class="news-box">
+                        <div class="news-title">
+                            <img class="title-pic" src="/static/img/view.png" alt="hot">
+                            <h3 class="title-text" >大家都在看</h3>
+                            <span class="news-more">更多</span>
+                        </div>
+                        <ul class="news-text-list">
+                            {% for Look_new in Look_News %}
+{#                            <li class="animate animate-pull"><a href="#">新中国残疾人权益保障70年</a></li>#}
+{#                            <li class="animate animate-pull"><a href="#">军事专家解读《新时代的中国国防》六大亮点</a></li>#}
+{#                            <li class="animate animate-pull"><a href="#">全国妇联追授周泉泉全国三八红旗手荣誉</a></li>#}
+{#                            <li class="animate animate-pull"><a href="#">国家防总派出5个工作组协助地方开展抗洪救灾</a></li>#}
+                            <li class="animate animate-pull">
+                                <a href="{% url 'newapp:detail_new' %}?newid={{ Look_new.newID }}">{{Look_new.newTitle }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="context-row">
+                <div class="comments">
+                    <h3>评论</h3>
+                    <div class="input-box">
+                        <input type="text" id="comments-input" class="input-main" placeholder="请输入评论...">
+                        <input type="button" value="提交" class="input-submit" id="input-submit">
+                    </div>
+                    <div class="comments-section">
+                        <ul class="comments-list" id="comments-list">
+{#                            {% for com in comms %}#}
+{#                            <li>#}
+{#                                <div class="list-header">#}
+{#                                    <span class="header-title">{{ com.nameID__userName }}</span>#}
+{#                                    <span class="header-puttime">{{ com.commentDate }}</span>#}
+{#                                    <span class="header-close"><img class="icon-16" src="/static/img/close.png" alt="close"></span>#}
+{#                                </div>#}
+{#                                <div class="list-main">{{ com.commentContent }}</div>#}
+{#                                <div class="like-box"><img class="icon-18" src="/static/img/like.png" alt="like">{{ com.commentFavorite }}</div>#}
+{#                            </li>#}
+{#                            {% endfor %}#}
+                        </ul>
+                    </div>
+                </div>
+                <script src="/static/js/jquery-1.10.2.min.js"></script>
+                <script src="/static/js/comments.js"></script>
+            </div>
+        </div>
+    </div>
+    <!-- 尾部 -->
+    <footer class="footer">
+        <div class="footer-up">
+            <div class="up-main">
+                <div class="footer-link">
+                    <h4>常用链接</h4>
+                    <ul class="link-list">
+                        <li><a href="">百度</a></li>
+                        <li><a href="">百里半</a></li>
+                        <li><a href="">谷歌</a></li>
+                        <li><a href="">掘金社区</a></li>
+                        <li><a href="">知乎</a></li>
+                        <li><a href="">Github</a></li>
+                        <li><a href="">百度</a></li>
+                        <li><a href="">百里半</a></li>
+                        <li><a href="">谷歌</a></li>
+                        <li><a href="">掘金社区</a></li>
+                        <li><a href="">知乎</a></li>
+                        <li><a href="">Github</a></li>
+                    </ul>
+                </div>
+                <div class="footer-pic">
+                    <div class="pic-wexin">
+                        <div class="pic-main"><img src="/static/img/test.png" alt="wexin"></div>
+                        <span>微信</span>
+                    </div>
+                    <div class="pic-QQ">
+                        <div class="pic-main"><img src="/static/img/test.png" alt="QQ"></div>
+                        <span>QQ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-down">
+            <span>Copyright © 2019 Sohu All Rights Reserved. 厚溥公司 版权所有</span>
+            <span>邮箱：jubaosohu@sohu-inc.com</span>
+        </div>
+    </footer>
+</body>
+</html>

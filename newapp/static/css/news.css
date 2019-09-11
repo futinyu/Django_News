@@ -1,0 +1,136 @@
+/* 主体内容 */
+.main {
+
+}
+
+/* main-导航 */
+.main-nav{
+    height: 70px;
+    line-height: 70px;
+    background-color: #fff;
+}
+.nav-list {
+    display: flex;
+    margin-left: 25%;
+    height: 100%;
+}
+.nav-list li {
+    text-align: center;
+    width: 80px;
+}
+.nav-list li a {
+    font-size: 18px;
+}
+.nav-list li.nav-hover a{
+    font-weight: bold;
+    color: #576CE3;
+}
+
+/* main-正文 */
+.main-context {
+    margin: 20px auto;
+    width: 1240px;
+}
+.context-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.context-listPage {
+    margin: 0;
+}
+.row-flex-2 {
+    flex: 2;
+}
+.row-flex-3 {
+    flex: 3;
+}
+.row-flex-1 {
+    flex: 1
+}
+.row-bg-white {
+    background-color: #fff;
+}
+.row-left {
+    margin-right: 10px;
+}
+.row-right {
+    margin-left: 10px;
+}
+/* main-位置 */
+.context-pos {
+    line-height: 70px;
+    height: 70px;
+    width: 100%;
+    background-color: #fff;
+}
+.pos-list {
+    color: #929292;
+    font-size: 12px;
+    display: flex;
+    height: 100%;
+    margin-left: 20px;
+}
+.pos-list li {
+    margin: 0 5px;
+}
+.pos-list a span{
+    font-size: 12px;
+    margin: 0 22px;
+    vertical-align: middle;
+}
+.pos-list img {
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+}
+.split {
+    line-height: 72px;
+}
+
+/* 分页导航 */
+.news-pageNav {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-list {
+    position: relative;
+    align-items: center;
+    margin: 0 10px;
+    width: 110px;
+    height: 22px;
+    overflow: hidden;
+}
+.page-list li {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 6px;
+    transition: all 0.4s ease-out;
+}
+.page-list li a{
+    display: block;
+    color: inherit;
+    font-size: 14px;
+}
+.page-list li:hover {
+    background-color: #1890FF;
+    color: #fff;
+}
+.page-list li.active {
+    background-color: #1890FF;
+    color: #fff;
+}
+.page-prev, .page-next {
+    width: 16px;
+    height: 16px;
+    font-size: 0;
+    cursor: pointer;
+}

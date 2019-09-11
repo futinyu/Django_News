@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Python 新闻</title>
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/news.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+</head>
+<body>
+<!-- 头部 -->
+<header class="header">
+    <div class="header-main">
+        <div class="header-logo">
+            <a href="/" class="logo-pic"><img src="../../static/img/logo.png" alt="logo"></a>
+            <span class="logo-text">Python</span>
+        </div>
+        <ul class="header-list">
+            <li class="header-hover"><a href="{% url 'newapp:index' %}">首页</a></li>
+            <li><a href="{% url 'newapp:main_new' %}">新闻</a></li>
+            <li><a href="{% url 'newapp:advert' %}">广告</a></li>
+        </ul>
+        <div class="header-user">
+            {% if name %}
+                <div class="user-main">
+                    <span>您好 {{ name }}</span>·<a href="{% url 'newapp:logout' %}">注销</a>
+                </div>
+            {% else %}
+                <div class="user-main">
+                    <a href="{% url 'newapp:login' %}">登录</a>·<a href="{% url 'newapp:register' %}">注册</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</header>
+<div class="main">
+    <div class="index-context">
+        <!-- 轮播 -->
+        <div class="context-row">
+            <div class="banner">
+                <ul class="img">
+                    {% for rand_new in rand_news %}
+                    <li><a href="{% url 'newapp:detail_new' %}?newid={{ rand_new.newID }}">
+                       <h2 class="banner-title">{{ rand_new.newTitle|truncatechars:'20' }}</h2>
+                        <img src="{{ rand_new.newImage }}" alt=" "/>
+                    </a></li>
+{#                    <li><img src="../../static/img/banner.jpg" alt=""/></li>#}
+{#                    <li><img src="../../static/img/banner.jpg" alt=""/></li>#}
+{#                    <li><img src="../../static/img/banner.jpg" alt=""/></li>#}
+{#                    <li><img src="../../static/img/banner.jpg" alt=""/></li>#}
+{#                    <li><img src="../../static/img/banner.jpg" alt=""/></li>#}
+                    {% endfor %}
+
+                </ul>
+                <ul class="num">
+
+                </ul>
+                <div class="btn btn_l">&lt;</div>
+                <div class="btn btn_r">&gt;</div>
+            </div>
+            <script src="../../static/js/jquery-1.10.2.min.js"></script>
+            <script type="text/javascript" src="../../static/js/poster.js"></script>
+        </div>
+        <div class="context-row">
+            <div class="row-left row-flex-3 row-bg-white">
+                <div class="news-box">
+                    <div class="news-title">
+                        <img class="title-pic" src="../../static/img/hot.png" alt="hot">
+                        <h3 class="title-text">要闻</h3>
+                        <span class="news-more"><a href="{% url 'newapp:child_new' %}?type=要闻">更多</a></span>
+                    </div>
+                    <ul class="news-pic-list-2 index-pic-list">
+                        {% for n in yaowen_list %}
+                        <li>
+                            <div class="pic-img">
+                                <a href="{% url 'newapp:detail_new' %}?newid={{ n.newID }}"><img src="{{ n.newImage }}" alt="">
+                                </a>
+                            </div>
+                            <div class="news-info">
+                                <h3 class="info-title-blod">
+                                    <a href="{% url 'newapp:detail_new' %}?newid={{ n.newID }}">{{ n.newTitle }}</a>
+                                </h3>
+                                <div class="info-sign">
+                                    <ul class="sign-list">
+                                        <li>{{ n.newLabel }}</li>
+                                    </ul>
+                                    <span class="news-puttime">{{ n.newDate }}</span>
+                                    <span class="news-views"><img class="views-img" src="../../static/img/read.png"
+                                                                  alt="阅读量">{{ n.newView }}</span>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row-right row-flex-2">
+                <div class="news-box index-news-box">
+                    <div class="news-title">
+                        <img class="title-pic" src="../../static/img/star.png" alt="hot">
+                        <h3 class="title-text">国内</h3>
+                        <span class="news-more"><a href="{% url 'newapp:child_new' %}?type=国内">更多</a></span>
+                    </div>
+                    <ul class="news-text-list">
+                        {% for n in guonei_list %}
+                        <li class="animate animate-pull"><a href="{% url 'newapp:detail_new' %}?newid={{ n.newID }}">{{ n.newTitle | truncatechars:"22" }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="news-box index-news-box">
+                    <div class="news-title">
+                        <img class="title-pic" src="../../static/img/military.png" alt="hot">
+                        <h3 class="title-text">国际</h3>
+                        <span class="news-more"><a href="{% url 'newapp:child_new' %}?type=国际">更多</a></span>
+                    </div>
+                    <ul class="news-text-list">
+                        {% for n in guoji_list %}
+                        <li class="animate animate-pull"><a href="{% url 'newapp:detail_new' %}?newid={{ n.newID }}">{{ n.newTitle | truncatechars:"22" }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+          <div class="zizhi">
+                <div class="zizhi_1">
+					<span style="color:red;">足球强国</span><img src="./static/img/ffg.jpg"/>
+				</div>
+				<img class="zuo" src="/static/img/zuo.jpg"/>
+				<img class="you" src="/static/img/you.jpg"/>
+				<div class="zizhi_2">
+					<div class="zizhi_2_1">
+						<div class="zizhi_2_1_1">
+						<img src="/static/img/zizhi_4.jpg"/>
+						<img src="/static/img/zizhi_1.jpg"/>
+						<img src="/static/img/zizhi_2.jpg"/>
+						<img src="/static/img/zizhi_3.jpg"/>
+						<img src="/static/img/zizhi_5.jpg"/>
+						<img src="/static/img/zizhi_4.jpg"/>
+						<img src="/static/img/zizhi_1.jpg"/>
+						<img src="/static/img/zizhi_2.jpg"/>
+						<img src="/static/img/zizhi_3.jpg"/>
+						<img src="/static/img/zizhi_5.jpg"/>
+						</div>
+				   </div>
+				</div>
+			</div>
+
+        <div class="context-row">
+            <div class="row-flex-1 row-left">
+                <div class="news-box index-news-text">
+                    <div class="news-title">
+                        <img class="title-pic" src="../../static/img/arrest.png" alt="hot">
+                        <h3 class="title-text">科技</h3>
+                        <span class="news-more"><a href="{% url 'newapp:child_new' %}?type=科技">更多</a></span>
+                    </div>
+                    <ul class="news-text-list">
+                        {% for n in keji_list %}
+                        <li class="animate animate-pull"><a href="{% url 'newapp:detail_new' %}?newid={{ n.newID }}">{{ n.newTitle | truncatechars:"22" }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row-flex-1 row-left row-right">
+                <div class="news-box index-news-text">
+                    <div class="news-title">
+                        <img class="title-pic" src="../../static/img/help.png" alt="hot">
+                        <h3 class="title-text">体育</h3>
+                        <span class="news-more"><a href="{% url 'newapp:child_new' %}?type=体育">更多</a></span>
+                    </div>
+                    <ul class="news-text-list">
+                        {% for n in tiyu_list %}
+                        <li class="animate animate-pull"><a href="{% url 'newapp:detail_new' %}?newid={{ n.newID }}">{{ n.newTitle | truncatechars:"22" }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row-flex-1 row-right">
+                <div class="news-box index-news-text">
+                    <div class="news-title">
+                        <img class="title-pic" src="../../static/img/media.png" alt="hot">
+                        <h3 class="title-text">财经</h3>
+                        <span class="news-more"><a href="{% url 'newapp:child_new' %}?type=财经">更多</a></span>
+                    </div>
+                    <ul class="news-text-list">
+                        {% for n in money_list %}
+                        <li class="animate animate-pull"><a href="{% url 'newapp:detail_new' %}?newid={{ n.newID }}">{{ n.newTitle | truncatechars:"22" }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 尾部 -->
+<footer class="footer">
+    <div class="footer-up">
+        <div class="up-main">
+            <div class="footer-link">
+                <h4>常用链接</h4>
+                <ul class="link-list">
+                    <li><a href="https://www.baidu.com/" target="_blank">百度</a></li>
+                    <li><a href="https://www.bailiban.com/" target="_blank">百里半</a></li>
+                    <li><a href="https://www.google.com/" target="_blank">谷歌</a></li>
+                    <li><a href="https://juejin.im/" target="_blank">掘金社区</a></li>
+                    <li><a href="https://www.zhihu.com/signin?next=%2F" target="_blank">知乎</a></li>
+                    <li><a href="https://github.com/" target="_blank">Github</a></li>
+                    <li><a href="https://www.qq.com/" target="_blank">腾讯</a></li>
+                    <li><a href="https://cn.aliyun.com/" target="_blank">阿里云</a></li>
+                    <li><a href="https://www.163.com/" target="_blank">网易</a></li>
+                    <li><a href="http://www.sohu.com/" target="_blank">搜狐</a></li>
+                    <li><a href="https://www.epicgames.com/store/zh-CN/" target="_blank">Epic</a></li>
+                    <li><a href="https://store.steampowered.com/" target="_blank">steam</a></li>
+                </ul>
+            </div>
+            <div class="footer-pic">
+                <div class="pic-wexin">
+                    <div class="pic-main"><img src="../../static/img/weixin.png" alt="wexin"></div>
+                    <span>微信</span>
+                </div>
+                <div class="pic-QQ">
+                    <div class="pic-main"><img src="../../static/img/qq.jpg" alt="QQ"></div>
+                    <span>QQ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-down">
+        <span>Copyright © 2019 Sohu All Rights Reserved. 厚溥公司 版权所有</span>
+        <span>邮箱：jubaosohu@sohu-inc.com</span>
+    </div>
+</footer>
+</body>
+</html>

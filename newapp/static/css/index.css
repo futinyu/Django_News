@@ -1,0 +1,115 @@
+.index-context {
+    overflow: hidden;
+    width: 1240px;
+    margin: 0 auto;
+}
+.index-news-box {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 6px;
+}
+.index-pic-list {
+    border: 0 
+}
+.bg-move {
+    position: relative;
+    background-image: url("../img/bg.jpg");
+    background-attachment: fixed;
+    height: 185px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+.index-news-text {
+    margin: 0;
+    border-radius: 6px;
+    background-color: #fff;
+}
+.zizhi{
+	width:1240px;
+
+	margin:0px auto;
+	margin-top:10px;
+	overflow:hidden;
+	border:1px #ccc solid;
+	position:relative;
+}
+.zuo{
+	width:22px;
+	height:26px;
+	position:absolute;/*相对定位*/
+	top:160px;
+	left:10px;
+}
+.you{
+	width:22px;
+	height:26px;
+	position:absolute;
+	top:160px;
+	right:10px;
+}
+.zizhi_1{
+	line-height:40px;
+	font-size:20px;
+}
+.zizhi_1 img{
+	width:1140px;
+	height:21px;
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+}
+.zizhi_2{
+	width:1230px;
+	margin:0px 5px 10px 5px;
+	background:#f4f4f4;
+	overflow:hidden;
+}
+.zizhi_2 img{
+	float:left;
+	margin-left:10px;
+	width:280px;
+	height:180px;
+}
+.zizhi_2_1{
+	width:1150px;
+	height:180px;
+	margin:45px auto;
+	overflow:hidden;
+	position:relative;
+}
+.zizhi_2_1_1{
+	width:2200px;
+	height:180px;
+	position:absolute;
+	left:-290px;
+}
+
+
+.banner { width:1440px; height:400px; margin:20px auto 0; position:relative; overflow:hidden; border-radius: 8px;background-color: #fff}
+.banner .img{width:15000px; position:absolute; left:0px;top:0px;}
+.banner .img img{width:1440px; height:450px;}
+.banner .img li{float:left;}
+.banner .num { position:absolute; width:100%; bottom:10px; left:0px; text-align:center; font-size:0px;}
+.banner .num li { width:10px; height:10px; background-color:#888; border-radius:50%;display:inline-block; margin:0px 3px; cursor:pointer;}
+.banner .num li.on {background-color: #576CE3;}
+.banner .btn {width: 30px;height: 50px;background-color: #808080;opacity: 0.5; position:absolute;top:50%; margin-top:-25px;
+    cursor:pointer;
+    text-align:center;
+    line-height:50px;
+    font-size:40px;
+    color:#fff;
+    font-family:"宋体";
+    display:none;
+    filter:alpha(opacity=0.5);
+}
+.banner .btn_l { left:0px;}
+.banner .btn_r { right:0px;}
+.banner:hover .btn { display:block;}
+.banner-title {
+	color: #576CE3;
+	font-size: 20px;
+	font-weight: bold;
+	position: absolute;
+	padding-left: 20px;
+	padding-top: 10px;
+}

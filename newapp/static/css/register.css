@@ -1,0 +1,90 @@
+*{margin:0px;padding:0px;}
+#zong{
+	position:relative;
+	width:100%;
+	height:100%;
+	background-image: url(../../static/img/bg.jpg);
+	background-size: 100% 100%;
+}
+#yu img{
+	position:absolute;
+	width:140px;
+	height:140px;
+	left: 1000px;
+	top: 160px;
+	border-radius: 60px;
+	box-shadow: 0px 0px 0px 0px rgba(170, 170, 170, 1);
+
+}
+#zhu{
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -241px;
+	margin-top: -203px;
+	width: 482px;
+	height: 472px;
+	line-height: 20px;
+	border-radius: 10px;
+	text-align: center;
+	box-shadow: 4px 4px 10px 0px rgba(170, 170, 170, 1);
+}
+#zhu p{
+	margin-left:50px;
+	padding-top:29px;
+	width: 48px;
+	height: 38px;
+	color: rgba(16, 16, 16, 1);
+	font-size: 24px;
+	text-align: left;
+	font-family: SourceHanSansSC-bold;
+}
+#zhu input{
+	width: 380px;
+	height: 60px;
+	border-radius: 4px;
+	color: rgba(136, 136, 136, 1);
+	font-size: 18px;
+	text-align: left;
+	font-family: Microsoft Yahei;
+	border: 2px solid rgba(107, 125, 232, 1);
+	margin-top:15px;
+	margin-left:50px;
+	border-radius: 10px;
+}
+#zhu input::-webkit-input-placeholder{
+	padding-left:15px;
+	
+}
+#zhu button{
+	width: 380px;
+	height: 60px;
+	margin-top:10px;
+	margin-left:50px;
+	border-radius: 10px;
+	background-color: rgba(107, 125, 232, 1);
+	color: rgba(255, 255, 255, 1);
+	font-size: 18px;
+	text-align: center;
+	font-family: Microsoft Yahei;
+	border: 1px solid rgba(187, 187, 187, 1);
+}
+#zhu span{
+margin-right:240px;
+width: 145px;
+height: 24px;
+color: rgba(146, 146, 146, 1);
+font-size: 16px;
+text-align: left;
+font-family: SourceHanSansSC-regular;
+}
+.yz{
+	padding-left:50px;
+}
+td>li{
+	width:33%;
+	float:left;
+	text-align:center;
+	list-style:none;
+}
+		
